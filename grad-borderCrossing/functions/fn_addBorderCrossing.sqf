@@ -5,16 +5,7 @@ grad_borderCrossing_fnc_addBorderCrossing;
 
 params ["_gate", "_guardClass", "_side"];
 
-_gate addEventHandler ["Killed", {
-        params ["_unit", "_killer", "_instigator", "_useEffects"];
-
-        private _actualKiller = effectiveCommander  vehicle _killer;
-        if (side _actualKiller != east) then {
-            _actualKiller setCaptive false;
-            ["GRAD_borderCrossing_gateDown", [_gate, _actualKiller]] call CBA_fnc_globalEvent;
-        };
-}];
-
+[_gate] call GRAD_borderCrossing_fnc_gateDestroyedEH;
 
 
 private _areaDistance = 100;
@@ -37,7 +28,7 @@ _guards pushBackUnique _guard;
 _gate setVariable ["GRAD_borderCrossing_assignedGuards", _guards, true];
 
 private _speedSignPos = _gatePos getPos [100, (getDir _gate) + 180];
-_speedSignPos set [2,0];
+_speedSignPos set [2,-1];
 private _speedSign = "CUP_sign_speed20" createVehicle _speedSignPos;
 _speedSign setDir ((getDir _gate) + 0);
 
@@ -68,7 +59,7 @@ _markerstr setMarkerSize [_areaWidth,_areaDistance];
     // systemChat str _vehiclesWaiting;
 
 	 if (count _vehiclesWaiting > 0 && !(_guard getVariable ["grad_borderCrossing_guard_busy", true])) then {
-	 	systemChat "guard active";
+	 	// systemChat "guard active";
 	 	_guard setVariable ["grad_borderCrossing_guard_busy", true];
 
 

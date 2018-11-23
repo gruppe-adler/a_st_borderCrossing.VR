@@ -1,6 +1,9 @@
 params ["_areaArray", "_vehicle", "_guard", "_gate"];
-{_x enableGunLights "forceOff"} foreach (units group _guard);
-_guard setDir (_guard getDir _vehicle);
+
+
+// _guard setDir (_guard getDir _vehicle);
+_guard lookAt _vehicle;
+_guard doWatch _vehicle;
 _guard playMoveNow "Acts_ShieldFromSun_in";
 _guard playMove "Acts_ShieldFromSun_loop";
 
