@@ -55,3 +55,20 @@ if (!isServer) exitWith {};
     };
 
 }] call CBA_fnc_addEventHandler;
+
+
+
+["GRAD_borderCrossing_gateDown", { 
+
+        params ["_gate", "_killer"];
+
+        private _guards = _gate getVariable ["GRAD_borderCrossing_assignedGuards", []];
+
+        {
+            _x reveal _killer;
+            _x doTarget _killer;
+            _x setVariable ["GRAD_borderCrossing_alarmRaised", true];
+            _x enableAI "ANIM";
+        } forEach _guards;
+
+}] call CBA_fnc_addEventHandler;

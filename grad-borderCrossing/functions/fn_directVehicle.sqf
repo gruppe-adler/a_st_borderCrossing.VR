@@ -17,6 +17,8 @@ _guard addEventHandler ["AnimDone", {
     params ["_areaArray", "_guard", "_vehicle", "_gate"];
 	_guard removeAllEventHandlers "AnimDone";
 	_guard playMoveNow "Acts_ShieldFromSun_out";
+    _guard doWatch _vehicle;
+    
 	[_areaArray, _guard, _vehicle, _gate] call GRAD_borderCrossing_fnc_checkVehicle;
 		
 }, [_areaArray, _guard, _vehicle, _gate]] call CBA_fnc_waitUntilAndExecute;

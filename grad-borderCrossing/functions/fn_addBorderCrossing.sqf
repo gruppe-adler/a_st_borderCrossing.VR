@@ -5,6 +5,18 @@ grad_borderCrossing_fnc_addBorderCrossing;
 
 params ["_gate", "_guardClass", "_side"];
 
+_gate addEventHandler ["Killed", {
+        params ["_unit", "_killer", "_instigator", "_useEffects"];
+
+        private _actualKiller = effectiveCommander  vehicle _killer;
+        if (side _actualKiller != east) then {
+            _actualKiller setCaptive false;
+            ["GRAD_borderCrossing_gateDown", [_gate, _actualKiller]] call CBA_fnc_globalEvent;
+        };
+}];
+
+
+
 private _areaDistance = 100;
 private _areaWidth = 5;
 
@@ -15,12 +27,20 @@ private _areaPos = _gatePos getPos [_areaDistance/2, (getDir _gate) + 180];
 private _guard = (createGroup _side) createUnit [_guardClass, _guardPos, [], 0, "CAN_COLLIDE"];
 
 _guard setDir ((getDir _gate) + 180);
-
-
 doStop _guard;
 
 _guard setVariable ["grad_borderCrossing_guard_busy", false];
 _guard disableAI "ANIM";
+
+private _guards = _gate getVariable ["GRAD_borderCrossing_assignedGuards", []];
+_guards pushBackUnique _guard;
+_gate setVariable ["GRAD_borderCrossing_assignedGuards", _guards, true];
+
+private _speedSignPos = _gatePos getPos [100, (getDir _gate) + 180];
+_speedSignPos set [2,0];
+private _speedSign = "CUP_sign_speed20" createVehicle _speedSignPos;
+_speedSign setDir ((getDir _gate) + 0);
+
 
 // area to check for vehicles wanting to get in
 private _areaArray = [_areaPos, _areaWidth, _areaDistance, 0, true, -1];
@@ -34,6 +54,9 @@ _markerstr setMarkerSize [_areaWidth,_areaDistance];
 [{
 	params ["_args", "_handle"];
 	 _args params ["_areaArray", "_guard", "_gatePos", "_gate"];
+
+    // if alarm runs, dont do anything
+    if (_guard getVariable ["GRAD_borderCrossing_alarmRaised", false]) exitWith {};
 
 	// only accept cars
     private _vehiclesWaiting = (
