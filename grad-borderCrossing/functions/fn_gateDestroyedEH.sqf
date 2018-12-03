@@ -1,3 +1,17 @@
+#include "script_component.hpp"
+/*
+ * Arguments:
+ * 0: gate <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [this] call GRAD_BorderCrossing_fnc_gateDestroyedEH;
+ *
+ * Public: No
+ */
+
 params ["_gate"];
 
 _gate addEventHandler ["HandleDamage", {
@@ -7,7 +21,7 @@ _gate addEventHandler ["HandleDamage", {
         private _actualKiller = effectiveCommander vehicle _source;
         if (side _actualKiller != east) then {
             _actualKiller setCaptive false;
-            ["GRAD_borderCrossing_gateDown", [_gate, _actualKiller]] call CBA_fnc_globalEvent;
+            ["GRAD_BorderCrossing_gateDown", [_gate, _actualKiller]] call CBA_fnc_globalEvent;
         };
     };
 }];

@@ -1,11 +1,11 @@
+#include "script_component.hpp"
 params ["_vehiclesWaiting", "_gate"];
 
 private _nextVehicle = objNull;
 
-// hintsilent format ["vehicles: %1", _vehiclesWaiting];
+TRACE_1("GRAD BorderCrossing Vehicles waiting: ", _vehiclesWaiting);
 
 private _allVehicles = nearestObjects [_gate, ["Man"], 200];
-
 private _closestVehicles = _allVehicles arrayIntersect _vehiclesWaiting;
 
 

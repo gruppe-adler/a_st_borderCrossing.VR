@@ -1,21 +1,38 @@
+#include "script_component.hpp"
+/*
+ * Arguments:
+ * 0: areaArray <ARRAY>
+ * 1: vehicle <OBJECT>
+ * 2: guard <OBJECT>
+ * 3: gate <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [_areaArray, _vehicle, _guard, _gate] call GRAD_BorderCrossing_fnc_openBarGate;
+ *
+ * Public: No
+ */
+
 params ["_areaArray", "_vehicle", "_guard", "_gate"];
 
-_guard setVariable ["grad_borderCrossing_vehicle", _vehicle];
-_guard setVariable ["grad_borderCrossing_gate", _gate];
+_guard setVariable ["GRAD_BorderCrossing_vehicle", _vehicle];
 
-_guard playMoveNow "Acts_ShowingTheRightWay_in";
+
+[_guard,  "Acts_ShowingTheRightWay_in", 1] call ace_common_fnc_doAnimation;
 _gate animate ["Door_1_rot", 1];
 
 
 _guard addEventHandler ["AnimDone", {
-	params ["_unit", "_anim"];
+	params ["_guard", "_anim"];
 
 	if (_anim == "Acts_ShowingTheRightWay_in") then {
-		_unit playMoveNow "Acts_ShowingTheRightWay_loop";
+		[_guard, "Acts_ShowingTheRightWay_loop", 0] call ace_common_fnc_doAnimation;
 	};
 
 	if (_anim == "Acts_ShowingTheRightWay_loop") then {
-		_unit playMove "Acts_ShowingTheRightWay_loop";
+		[_guard, "Acts_ShowingTheRightWay_loop", 0] call ace_common_fnc_doAnimation;
 	};
 }];
 
@@ -26,8 +43,8 @@ _guard addEventHandler ["AnimDone", {
 {
 	params ["_areaArray", "_guard", "_vehicle", "_gate"];
 	_guard removeAllEventHandlers "AnimDone";
-	_guard playMoveNow "Acts_ShowingTheRightWay_out";
-	_guard setVariable ["grad_borderCrossing_guard_busy", false];
+	[_guard, "Acts_ShowingTheRightWay_out", 0] call ace_common_fnc_doAnimation;
+	_guard setVariable ["GRAD_BorderCrossing_guard_busy", false];
 	_gate animate ["Door_1_rot", 0];
-		
+
 }, [_areaArray, _guard, _vehicle, _gate]] call CBA_fnc_waitUntilAndExecute;

@@ -1,18 +1,19 @@
+#include "script_component.hpp"
 params ["_areaArray", "_guard", "_vehicle", "_gate"];
 
 _guard playMoveNow "Acts_PercMstpSlowWrflDnon_handup2c";
 
-_guard setVariable ["grad_borderCrossing_guard_vehicle", _vehicle];
-_guard setVariable ["grad_borderCrossing_guard_gate", _gate];
+_guard setVariable ["GRAD_BorderCrossing_guard_vehicle", _vehicle];
+_guard setVariable ["GRAD_BorderCrossing_guard_gate", _gate];
 
 
 _guard addEventHandler ["AnimDone", {
 	params ["_unit", "_anim"];
 
-	private _status = _unit getVariable ["grad_borderCrossing_status", "unknown"];
+	private _status = _unit getVariable ["GRAD_BorderCrossing_status", "unknown"];
 
 	if (_status isEqualTo "combat") exitWith {
-		
+
 	};
 
 	if (_status isEqualTo "denied") exitWith {
@@ -61,16 +62,16 @@ _guard addEventHandler ["AnimDone", {
 		};
 	};
 
-	switch (_anim) do { 
-		case "Acts_PercMstpSlowWrflDnon_handup2c": {  
-			_unit playMoveNow "Acts_PercMstpSlowWrflDnon_handup2c"; 
-		}; 
+	switch (_anim) do {
+		case "Acts_PercMstpSlowWrflDnon_handup2c": {
+			_unit playMoveNow "Acts_PercMstpSlowWrflDnon_handup2c";
+		};
 
 
-		case "Acts_listeningToRadio_In" : {  
+		case "Acts_listeningToRadio_In" : {
 			_unit playMoveNow "Acts_listeningToRadio_Loop";
-		}; 
-		case "Acts_listeningToRadio_Loop" : {  
+		};
+		case "Acts_listeningToRadio_Loop" : {
 			_unit playMoveNow "Acts_listeningToRadio_Out";
 		};
 		case "Acts_listeningToRadio_Out": {
@@ -100,8 +101,8 @@ _guard addEventHandler ["AnimDone", {
 	params ["_areaArray", "_guard", "_vehicle", "_gate"];
 	_guard removeAllEventHandlers "AnimDone";
 	_guard playMoveNow "Acts_ShowingTheRightWay_out";
-	_guard setVariable ["grad_borderCrossing_guard_busy", false];
+	_guard setVariable ["GRAD_BorderCrossing_guard_busy", false];
 	_gate animate ["Door_1_rot", 0];
 	_guard setRandomLip false;
-		
+
 }, [_areaArray, _guard, _vehicle, _gate]] call CBA_fnc_waitUntilAndExecute;
