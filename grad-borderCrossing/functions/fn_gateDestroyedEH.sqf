@@ -22,6 +22,7 @@ _gate addEventHandler ["HandleDamage", {
         if (side _actualKiller != east) then {
             _actualKiller setCaptive false;
             ["GRAD_BorderCrossing_gateDown", [_gate, _actualKiller]] call CBA_fnc_globalEvent;
+				systemChat format ["Gate Down by %1", _actualKiller];
         };
     };
 }];

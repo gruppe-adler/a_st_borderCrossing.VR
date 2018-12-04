@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=37;
+		nextID=39;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3631.6938,16.440918,315.33487};
-		dir[]={-0.16317816,-0.74624628,0.6455465};
-		up[]={-0.18286873,0.66567093,0.72345138};
-		aside[]={0.96963102,-1.2556848e-007,0.24509887};
+		pos[]={3607.6494,19.257875,314.38388};
+		dir[]={0.85781336,-0.51294959,0.035818409};
+		up[]={0.51251996,0.85837132,0.021399563};
+		aside[]={0.041724876,-2.8088834e-008,-0.99925643};
 	};
 };
 binarizationWanted=0;
@@ -32,14 +32,13 @@ addons[]=
 	"A3_Soft_F_Gamma_Van_01",
 	"ace_refuel",
 	"CUP_Buildings_Config",
-	"CUP_Misc_e_Config",
-	"A3_Characters_F_Jets"
+	"CUP_Misc_e_Config"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=8;
+		items=7;
 		class Item0
 		{
 			className="A3_Structures_F";
@@ -84,13 +83,6 @@ class AddonsMetaData
 		{
 			className="CUP_Misc_e_Config";
 			name="CUP_Misc_e_Config";
-		};
-		class Item7
-		{
-			className="A3_Characters_F_Jets";
-			name="Arma 3 Jets - Characters and Clothing";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
 		};
 	};
 };
@@ -144,7 +136,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3629.9624,6.4501238,324.14774};
+				position[]={3626.9063,6.4501238,324.27899};
 			};
 			side="Empty";
 			flags=4;
@@ -166,7 +158,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3629.7786,5.0014391,318.45358};
+						position[]={3626.7224,5.0014391,318.58484};
 					};
 					side="Civilian";
 					flags=6;
@@ -208,7 +200,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3629.7786,6.8577781,318.4126};
+				position[]={3626.7224,6.8577781,318.54385};
 			};
 			side="Civilian";
 			flags=6;
@@ -254,7 +246,7 @@ class Mission
 		class Item6
 		{
 			dataType="Group";
-			side="West";
+			side="Independent";
 			class Entities
 			{
 				items=1;
@@ -263,85 +255,22 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3628.2595,5.0014391,324.22595};
-						angles[]={0,1.6347593,0};
+						position[]={3624.5349,5.0014391,324.93399};
 					};
-					side="West";
+					side="Independent";
 					flags=7;
 					class Attributes
 					{
-						init="call{this setcaptive true;}";
 						isPlayer=1;
 					};
-					id=31;
-					type="B_Deck_Crew_F";
-					class CustomAttributes
-					{
-						class Attribute0
-						{
-							property="acex_headless_blacklist";
-							expression="_this setVariable [""acex_headless_blacklist"",_value,true]";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"BOOL"
-										};
-									};
-									value=0;
-								};
-							};
-						};
-						class Attribute1
-						{
-							property="speaker";
-							expression="_this setspeaker _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="Male03ENG";
-								};
-							};
-						};
-						class Attribute2
-						{
-							property="pitch";
-							expression="_this setpitch _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"SCALAR"
-										};
-									};
-									value=1.04;
-								};
-							};
-						};
-						nAttributes=3;
-					};
+					id=38;
+					type="I_crew_F";
 				};
 			};
 			class Attributes
 			{
 			};
-			id=30;
+			id=37;
 		};
 	};
 };

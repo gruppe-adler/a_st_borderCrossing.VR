@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project name="Grad">
+	<Package name="borderCrossing">
+    <Key ID="STR_grad_borderCrossing_showPass">
+      <English>Show Passport</English>
+      <German>Pass zeigen</German>
+    </Key>
+	</Package>
+</Project>

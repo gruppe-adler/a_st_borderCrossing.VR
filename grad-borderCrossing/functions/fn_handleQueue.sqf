@@ -17,21 +17,18 @@
 
 [{
    params ["_args","_handle"];
-   _args params ["_guard", "_gate", "_gateGuard", "_areaArray"];
+   _args params ["_guard", "_gate", "_gateGuard"];
+
+   //condition to end loop
+  if !([_gate, _gateGuard, _guard] call CBA_fnc_isAlive) then {
+     [_handle] call CBA_fnc_removePerFrameHandler;
+  };
 
    private _queue = _gate getVariable ["GRAD_BorderCrossing_queue", []];
-
-   private _vehiclesWaiting = (
-     (_gatePos nearEntities [["Man"], 200]) inAreaArray _areaArray
-   ) select {
-     side _x != west && {((assignedVehicleRole _x) select 0) isEqualTo "Driver"} && {alive _x}
-   };
-
-   if (_queue isEqualTo [] && {_vehiclesWaiting isEqualTo []}) exitWith {};
-
-   _queue = _queue + _vehiclesWaiting;
+   if (_queue isEqualTo []) exitWith {};
    private _nextVehicle = _queue select 0;
 
+   systemChat format ["Watching: %1", _nextVehicle];
    _guard lookAt _nextVehicle;
    _guard doWatch _nextVehicle;
 
@@ -48,28 +45,3 @@
       };
    };
 }, 1, _this] call CBA_fnc_addPerFrameHandler;
-
-
-_guard lookAt _vehicle;
-_guard doWatch _vehicle;
-_guard playMoveNow "Acts_ShieldFromSun_in";
-_guard playMove "Acts_ShieldFromSun_loop";
-
-_guard addEventHandler ["AnimDone", {
-    params ["_unit", "_anim"];
-	_unit playMove "Acts_ShieldFromSun_loop";
-}];
-
-[{
-    params ["_areaArray", "_guard", "_vehicle", "_gate"];
-	_guard distance _vehicle < 40
-},
-{
-    params ["_guard", "_vehicle", "_gate"];
-	_guard removeAllEventHandlers "AnimDone";
-	_guard playMoveNow "Acts_ShieldFromSun_out";
-    _guard doWatch _vehicle;
-
-	[_guard, _vehicle, _gate] call grad_borderCrossing_fnc_checkVehicle;
-
-}, [_guard, _vehicle, _gate]] call CBA_fnc_waitUntilAndExecute;

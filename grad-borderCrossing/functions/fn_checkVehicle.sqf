@@ -15,6 +15,8 @@
 
 params ["_trigger", "_triggerList"];
 
+systemChat format ["Trigger: %1, List: %2", _trigger, _triggerList];
+
 private _check = false;
 private _vehicle = vehicle (_triggerList select 0);
 
@@ -46,7 +48,6 @@ _guard doMove _movePosDoor;
 
 [
    {((getPos (_this select 0)) isEqualTo (_this select 1))},{
-      /*
       _this params ["_guard", "", "_vehicle", "_gate"];
 
       private _checkPlayer = [];
@@ -55,13 +56,13 @@ _guard doMove _movePosDoor;
          if (isPlayer _x) then {
             _crew pushBackUnique _x;
             _x setVariable ["GRAD_BorderCrossing_playerCheck", nil, true];
-            //[{[] remoteExecCall ["grad_borderCrossing_fnc_handleDiaglog", _this, false];}, _x] call CBA_fnc_execNextFrame;
+            [{[] remoteExecCall ["grad_borderCrossing_fnc_handleDiaglog", _this, false];}, _x] call CBA_fnc_execNextFrame;
          };
       }forEach crew _vehicle;
 
       if (_crew isEqualTo []) then {
-         //Handle AI
-
+         //Handle AI only
+         [{[] call grad_borderCrossing_fnc_openBarGate;},[],(random [10,20,30])] call CBA_fnc_waitAndExecute;
       }else{
          //Handle Player
          [
@@ -77,8 +78,7 @@ _guard doMove _movePosDoor;
                      if (!(isNil (_check)) && _check) then {_checkVar = _checkVar +1;};
                   };
                }forEach _crew;
-               if (_checkVar == _checkedPlayer) exitWith {false};
-               true
+               (_checkVar == _checkedPlayer)
             },
             {
                params ["_guard", "_vehicle", "_gate", "_crew"];
@@ -102,5 +102,4 @@ _guard doMove _movePosDoor;
             10
          ] call CBA_fnc_waitUntilAndExecute;
       };
-      */
    },[_guard, _movePosDoor, _vehicle, _gate]] call CBA_fnc_waitUntilAndExecute;

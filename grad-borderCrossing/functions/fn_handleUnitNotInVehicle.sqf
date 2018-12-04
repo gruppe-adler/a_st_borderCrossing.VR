@@ -11,3 +11,9 @@
  *
  * Public: No
  */
+
+if (count (_guard getVariable ["GRAD_BorderCrossing_handlingUnit", []]) >= 1) then {
+
+}else{
+
+};
