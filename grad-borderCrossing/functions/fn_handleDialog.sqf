@@ -1,22 +1,16 @@
 #include "script_component.hpp"
 /*
 * Arguments:
-* 0: gate <OBJECT>
-* 1: gateGuardClass <STRING>
-* 2: side <SIDE>
-* 3: guardClass <STRING> <OPTIONAL>
-* 4: speedSign <STRING> <OPTIONAL>
+* None
 *
 * Return Value:
 * None
 *
 * Example:
-* [this, "B_Story_SF_Captain_F", east] call grad_borderCrossing_fnc_addBorderCrossing;
+* [] call grad_borderCrossing_fnc_handleDiaglog;
 *
 * Public: No
 */
-
-params ["_guard"];
 
 private _dialog = createDialog "RscDisplayGame";
 if !(_dialog) exitWith {

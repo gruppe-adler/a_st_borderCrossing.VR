@@ -1,10 +1,6 @@
-#ifndef MODULES_DIRECTORY
-    #define MODULES_DIRECTORY node_modules
-#endif
-
 class grad_borderCrossing {
     class borderCrossing {
-        file = MODULES_DIRECTORY\grad_borderCrossing\functions;
+        file = grad-borderCrossing\functions;
 
         class addBorderCrossing;
         class checkPassport;

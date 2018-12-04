@@ -1,6 +1,6 @@
 #include "node_modules\grad-passport\grad_passport.hpp"
 
 class cfgFunctions {
-    #include "node_modules\grad_borderCrossing\cfgFunctions.hpp"
+    #include "grad_borderCrossing\cfgFunctions.hpp"
     #include "node_modules\grad-passport\cfgFunctions.hpp"
 };

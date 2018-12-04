@@ -19,8 +19,7 @@
 params ["_firstName", "_lastName", "_dateOfBirth", "_placeOfBirth", "_address", "_expires", "_serial", "_height", "_eyeColor", "_nationality", "_misc1", "_misc2", "_side"];
 
 if (Debug) then {
-   TRACE_9 ("Player Passport: ", _firstName, _lastName, _dateOfBirth, _placeOfBirth, _address, _expires, _serial, _height, _eyeColor);
-   TRACE_3 ("Player Passport: ", _nationality, _misc1, _misc2);
+   diag_log format ["Player Passport: ", _firstName, _lastName, _dateOfBirth, _placeOfBirth, _address, _expires, _serial, _height, _eyeColor, _nationality, _misc1, _misc2];
 };
 
 Switch (side) do {
