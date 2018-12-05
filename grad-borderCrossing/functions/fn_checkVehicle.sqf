@@ -87,11 +87,13 @@ _guard doMove _movePosDoor;
                {
                   _check = _x getVariable ["GRAD_BorderCrossing_playerCheck", nil];
                   if (isNil "_check") then {_check = true;};
-                  if !(_check) exitWith {};
+                  if !(_check) exitWith {[_x, _gate, _guard] call grad_borderCrossing_fnc_handleIllegale;};
 
                   private _passPortData = [_x] call grad-passport_fnc_getPassportData;
                   _passPortData pushBackUnique (side _guard);
-                  _passPortData call grad_borderCrossing_fnc_checkPassport;
+                  _check = _passPortData call grad_borderCrossing_fnc_checkPassport;
+
+                  if !(_check) exitWith {[_x, _gate, _guard] call grad_borderCrossing_fnc_handleIllegale;};
                }forEach _crew;
 
                if (_check) then {

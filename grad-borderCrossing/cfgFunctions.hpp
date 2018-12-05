@@ -7,6 +7,7 @@ class grad_borderCrossing {
         class checkVehicle;
         class gateDestroyedEH;
         class handleDialog;
+        class handleIllegale;
         class handleMultipleVehicles;
         class handleQueue;
         class handleUnitNotInVehicle;

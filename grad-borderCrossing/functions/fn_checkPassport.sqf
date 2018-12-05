@@ -18,7 +18,7 @@ if (true) then {
    diag_log format ["Player Passport: %1", _this];
 };
 
-Switch (_side) do {
+private _return = switch (str (_side)) do {
    case "WEST" : {
 
    };
@@ -28,8 +28,6 @@ Switch (_side) do {
    case "GUER" : {
 
    };
-   case "CIV" : {
-
-   };
+   case "CIV" : {true};
    default {ERROR_WITH_TITLE("Error Side", "Given side for passport control not found!");};
 };
