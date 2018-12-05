@@ -18,6 +18,8 @@ if (!isServer) exitWith {};
    params ["_station1"];
    _thisArgs params ["_station"];
 
+   diag_log format ["ALERT: %1, %2", _station, _station1];
+
    private _check = false;
    {
       if (_station == _x) exitWith {_check = true;};
@@ -25,7 +27,12 @@ if (!isServer) exitWith {};
 
    if !(_check) exitWith {};
 
+   private _guards = _gate getVariable ["GRAD_BorderCrossing_assignedGuards", []];
+   if (_guards isEqualTo []) exitWith {};
 
+   {
+      _x enableAI "ANIM";
+   } forEach _guards;
 
 }, [1]] call CBA_fnc_addEventHandlerArgs;
 
