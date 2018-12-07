@@ -18,6 +18,7 @@
 
 params ["_gate", "_gateGuardClass", "_side", ["_guardClass", ""], ["_speedSign", "CUP_sign_speed20"]];
 
+missionNamespace setVariable ["Grad_borderCrossing_gates", (missionNamespace getVariable ["Grad_borderCrossing_gates", []] pushBackUnique _gate)];
 
 [_gate] call grad_borderCrossing_fnc_gateDestroyedEH;
 
@@ -108,9 +109,9 @@ if (true) then {
 
 	if (_queue isEqualTo []) exitWith {};
 
-	private _nextVehicle = ((_gatePos nearEntities [["Man", "Car"], 20]) inAreaArray _areaArray) select {!((side _x) in [west,east]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}};
+	private _nextVehicle = (allUnits inAreaArray _areaArray) select {!((side _x) in [west,east]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}};
 	if (!(isNil "_nextVehicle") && count _nextVehicle > 0) then {
-		[(_nextVehicle select 0), _gate, _guard, _gateGuard] call grad_borderCrossing_fnc_checkVehicle;
+		[(vehicle (_nextVehicle select 0)), _gate, _guard, _gateGuard] call grad_borderCrossing_fnc_checkVehicle;
 	};
 
 },1,[_areaArray, _areaArrayTrigger, _guard, _gatePos, _gate, _gateGuard]] call CBA_fnc_addPerFrameHandler;

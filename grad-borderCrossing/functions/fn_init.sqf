@@ -23,7 +23,7 @@ if (!isServer) exitWith {};
    private _check = false;
    {
       if (_station == _x) exitWith {_check = true;};
-   }forEach (missionNamespace getVariable ["grad_borderCrossing_gates", []]);
+   }forEach (missionNamespace getVariable ["Grad_borderCrossing_gates", []]);
 
    if !(_check) exitWith {};
 

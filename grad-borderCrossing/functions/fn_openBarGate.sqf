@@ -24,25 +24,12 @@ _guard setVariable ["GRAD_BorderCrossing_vehicle", _vehicle];
 _gate animate ["Door_1_rot", 1];
 
 
-_guard addEventHandler ["AnimDone", {
-	params ["_guard", "_anim"];
-
-	if (_anim == "Acts_ShowingTheRightWay_in") then {
-		[_guard, "Acts_ShowingTheRightWay_loop", 0] call ace_common_fnc_doAnimation;
-	};
-
-	if (_anim == "Acts_ShowingTheRightWay_loop") then {
-		[_guard, "Acts_ShowingTheRightWay_loop", 0] call ace_common_fnc_doAnimation;
-	};
-}];
-
 [{
 	params ["_areaArray", "_guard", "_vehicle", "_gate"];
 	count ([_vehicle] inAreaArray _areaArray) == 0
 },
 {
 	params ["_areaArray", "_guard", "_vehicle", "_gate"];
-	_guard removeAllEventHandlers "AnimDone";
 	[_guard, "Acts_ShowingTheRightWay_out", 0] call ace_common_fnc_doAnimation;
 	_guard setVariable ["GRAD_BorderCrossing_guard_busy", false];
 	_gate animate ["Door_1_rot", 0];
