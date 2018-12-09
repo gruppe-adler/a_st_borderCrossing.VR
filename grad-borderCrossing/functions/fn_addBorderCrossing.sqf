@@ -18,6 +18,8 @@
 
 params ["_gate", "_gateGuardClass", "_side", ["_guardClass", ""], ["_speedSign", "CUP_sign_speed20"]];
 
+diag_log format ["SETUP: %1, %2, %3, %4, %5", _gate, _gateGuardClass, _side, _guardClass, _speedSign];
+
 missionNamespace setVariable ["Grad_borderCrossing_gates", (missionNamespace getVariable ["Grad_borderCrossing_gates", []] pushBackUnique _gate)];
 
 [_gate] call grad_borderCrossing_fnc_gateDestroyedEH;
@@ -35,6 +37,8 @@ private _areaPos = _gatePos getPos [_areaDistance, (getDir _gate) + 180];
 private _gateGuard = (createGroup _side) createUnit [_gateGuardClass, (_gatePos getPos [10, (getDir _gate) + 240]), [], 0, "CAN_COLLIDE"];
 private _guard = (createGroup _side) createUnit [_gateGuardClass, (_gatePos getPos [20, (getDir _gate) + 180]), [], 0, "CAN_COLLIDE"];
 
+diag_log format ["GateGuard: %1, Guard: %2", (side _gateGuard), (side _guard)];
+
 _guard setDir ((getDir _gate) + 180);
 _gateGuard setDir ((getDir _gate) + 180);
 doStop _guard;
@@ -42,8 +46,8 @@ doStop _gateGuard;
 
 _gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", false];
 _gateGuard setVariable ["GRAD_BorderCrossing_gate", _gate];
-_guard disableAI "ANIM";
-_gateGuard disableAI "ANIM";
+//_guard disableAI "ANIM";
+//_gateGuard disableAI "ANIM";
 
 //add the guards to the GVAR
 private _guards = _gate getVariable ["GRAD_BorderCrossing_assignedGuards", []];
@@ -86,11 +90,7 @@ if (true) then {
 	};
 
 	// only accept cars
-	private _vehiclesWaiting = (
-		allUnits inAreaArray _areaArray
-		) select {
-		!((side _x) in [west,east]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}
-	};
+	private _vehiclesWaiting = (allUnits inAreaArray _areaArray) select {((side _x) in [resistance, civilian ]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}};
 
 	diag_log str(_vehiclesWaiting);
 	private _queue = _gate getVariable ["GRAD_BorderCrossing_queue", []];
@@ -109,8 +109,8 @@ if (true) then {
 
 	if (_queue isEqualTo []) exitWith {};
 
-	private _nextVehicle = (allUnits inAreaArray _areaArray) select {!((side _x) in [west,east]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}};
-	if (!(isNil "_nextVehicle") && count _nextVehicle > 0) then {
+	private _nextVehicle = (allUnits inAreaArray _areaArray) select {((side _x) in [resistance, civilian ]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x} && {!(isEngineOn (vehicle _x))}};
+	if (!(_gateGuard getVariable ["GRAD_BorderCrossing_guard_busy", false]) && {!(isNil "_nextVehicle")} && {count _nextVehicle > 0}) then {
 		[(vehicle (_nextVehicle select 0)), _gate, _guard, _gateGuard] call grad_borderCrossing_fnc_checkVehicle;
 	};
 

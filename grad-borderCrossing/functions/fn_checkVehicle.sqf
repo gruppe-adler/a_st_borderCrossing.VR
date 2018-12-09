@@ -17,6 +17,10 @@
 
 params ["_vehicle", "_gate", "_guard", "_gateGuard"];
 
+_gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", true];
+
+systemChat format ["Checking Vehicle: %1", _vehicle];
+
 [_gateGuard, "Acts_SignalToCheck", 0] call ace_common_fnc_doAnimation;
 _gateGuard doMove (getPos _vehicle) getPos [2.5, 270];
 
