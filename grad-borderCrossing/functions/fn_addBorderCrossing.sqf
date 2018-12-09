@@ -84,15 +84,9 @@ if (true) then {
 	// if alarm runs, dont do anything
 	if (_guard getVariable ["GRAD_borderCrossing_alarmRaised", false]) exitWith {};
 
-	if (true) then {
-		private _inArea = (_gatePos nearEntities ["Man", 200]) inAreaArray _areaArray;
-		diag_log format ["Array: %1, W: %2, E: %3, %4 == %5 = %6, Alive: %7", _inArea, side (_inArea select 0) != west, side (_inArea select 0) != east, (driver (vehicle (_inArea select 0))), (_inArea select 0), (driver (vehicle (_inArea select 0))) isEqualTo (_inArea select 0), alive (_inArea select 0)];
-	};
-
 	// only accept cars
 	private _vehiclesWaiting = (allUnits inAreaArray _areaArray) select {((side _x) in [resistance, civilian ]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}};
 
-	diag_log str(_vehiclesWaiting);
 	private _queue = _gate getVariable ["GRAD_BorderCrossing_queue", []];
 	if !(_queue isEqualTo []) then {
 		{

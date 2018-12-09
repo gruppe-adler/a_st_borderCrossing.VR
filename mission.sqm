@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3594.8293,32.958996,328.06638};
-		dir[]={0.71842325,-0.6956256,-0.014930691};
-		up[]={0.69545174,0.71838307,-0.01445437};
-		aside[]={-0.020780012,4.4347507e-007,-0.99991363};
+		pos[]={3626.7537,13.020707,301.05081};
+		dir[]={-0.086854123,-0.36304858,0.92784685};
+		up[]={-0.033840079,0.93171352,0.36152142};
+		aside[]={0.995776,4.1722706e-007,0.093214765};
 	};
 };
 binarizationWanted=0;
@@ -423,6 +423,7 @@ class Mission
 {
 	class Intel
 	{
+		resistanceEast=1;
 		timeOfChanges=1800.0002;
 		startWeather=0;
 		startWind=0.1;
@@ -454,7 +455,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="call{[this, ""B_Story_SF_Captain_F"", east] call " \n "GRAD_BorderCrossing_fnc_addBorderCrossing;}";
+				init="call{[this, ""B_Story_SF_Captain_F"", west] call " \n "GRAD_BorderCrossing_fnc_addBorderCrossing;}";
 			};
 			id=2;
 			type="Land_BarGate_F";

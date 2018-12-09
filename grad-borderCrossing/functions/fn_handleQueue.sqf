@@ -28,20 +28,21 @@
    if (_queue isEqualTo []) exitWith {};
    private _nextVehicle = _queue select 0;
 
-   systemChat format ["Watching: %1", _nextVehicle];
+   diag_log format ["Watching: %1", _nextVehicle];
    _guard lookAt _nextVehicle;
    _guard doWatch _nextVehicle;
-
+   diag_log format ["Watching: %1, Speed: %2, Busy: %3", _nextVehicle, (speed _nextVehicle), (_gateGuard getVariable ["GRAD_BorderCrossing_guard_busy", false])];
    if (_gateGuard getVariable ["GRAD_BorderCrossing_guard_busy", false]) then {
       if (speed _nextVehicle > 0) then {
 
       };
    }else{
-      if (speed _nextVehicle > 0 && !(_guard getVariable ["GRAD_BorderCrossing_waveThrough", false])) then {
+      diag_log format ["Wavethrough: %1", (_guard getVariable ["GRAD_BorderCrossing_waveThrough", false])];
+      if (speed _nextVehicle > 0 && {!(_guard getVariable ["GRAD_BorderCrossing_waveThrough", false])}) then {
 
       }else{
          _guard setVariable ["GRAD_BorderCrossing_waveThrough", true];
-         [{_this setVariable ["GRAD_BorderCrossing_waveThrough", false];}, _guard, 5] call CBA_fnc_waitAndExecute;
+         [{_this setVariable ["GRAD_BorderCrossing_waveThrough", false];}, _guard, 15] call CBA_fnc_waitAndExecute;
       };
    };
 }, 1, _this] call CBA_fnc_addPerFrameHandler;

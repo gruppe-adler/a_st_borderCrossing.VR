@@ -18,11 +18,19 @@
 params ["_vehicle", "_gate", "_guard", "_gateGuard"];
 
 _gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", true];
+_gateGuard lookAt _vehicle;
+_gateGuard doWatch _vehicle;
 
 systemChat format ["Checking Vehicle: %1", _vehicle];
 
 [_gateGuard, "Acts_SignalToCheck", 0] call ace_common_fnc_doAnimation;
-_gateGuard doMove (getPos _vehicle) getPos [2.5, 270];
+
+private _pos =(getPos _vehicle) getPos [1, 90];
+_pos  set [2,0];
+
+private _debugObject = createSimpleObject ["Sign_Sphere10cm_F", _pos];
+systemChat str ([_debugObject, (getPos _debugObject)]);
+_gateGuard doMove ((getPos _vehicle) getPos [1, 90]);
 
 [
    {((getPos (_this select 0)) isEqualTo (_this select 1))},{
