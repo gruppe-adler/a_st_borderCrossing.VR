@@ -5,6 +5,7 @@ class grad_borderCrossing {
         class addBorderCrossing;
         class checkPassport;
         class checkVehicle;
+        class createGuard;
         class gateDestroyedEH;
         class handleDialog;
         class handleIllegale;

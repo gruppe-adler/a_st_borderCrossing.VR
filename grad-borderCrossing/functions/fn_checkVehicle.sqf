@@ -25,12 +25,20 @@ systemChat format ["Checking Vehicle: %1", _vehicle];
 
 [_gateGuard, "Acts_SignalToCheck", 0] call ace_common_fnc_doAnimation;
 
-private _pos =(getPos _vehicle) getPos [1, 90];
+private _pos =(getPos _vehicle) getPos [2, 270];
 _pos  set [2,0];
 
 private _debugObject = createSimpleObject ["Sign_Sphere10cm_F", _pos];
+_debugObject setPos _pos;
 systemChat str ([_debugObject, (getPos _debugObject)]);
-_gateGuard doMove ((getPos _vehicle) getPos [1, 90]);
+(group _gateGuard) move _pos;
+
+/*
+private _waypoint = (group _gateGuard) addWaypoint [[0,0,0], 0];
+_waypoint setWaypointCompletionRadius 0;
+_wp setWaypointPosition [(AGLToASL _pos), -1];
+(group _gateGuard) setCurrentWaypoint _waypoint;
+*/
 
 [
    {((getPos (_this select 0)) isEqualTo (_this select 1))},{

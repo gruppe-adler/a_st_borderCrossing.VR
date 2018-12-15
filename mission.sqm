@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3626.7537,13.020707,301.05081};
-		dir[]={-0.086854123,-0.36304858,0.92784685};
-		up[]={-0.033840079,0.93171352,0.36152142};
-		aside[]={0.995776,4.1722706e-007,0.093214765};
+		pos[]={3623.8904,14.932338,442.4744};
+		dir[]={0.001852256,-0.30602852,0.95214736};
+		up[]={0.00059741572,0.95195788,0.30609578};
+		aside[]={1.0001209,-1.3846886e-008,-0.0019455599};
 	};
 };
 binarizationWanted=0;
@@ -32,13 +32,25 @@ addons[]=
 	"A3_Soft_F_Gamma_Van_01",
 	"ace_refuel",
 	"CUP_Buildings_Config",
-	"CUP_Misc_e_Config"
+	"CUP_Misc_e_Config",
+	"A3_Weapons_F_Mod_SMGs_SMG_03",
+	"ace_realisticnames",
+	"A3_Weapons_F_Mod",
+	"A3_Weapons_F_Pistols_ACPC2",
+	"ace_ballistics",
+	"A3_Weapons_F",
+	"ace_smallarms",
+	"ace_nightvision",
+	"A3_Weapons_F_Items",
+	"ace_medical",
+	"ace_attach",
+	"ace_chemlights"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=7;
+		items=15;
 		class Item0
 		{
 			className="A3_Structures_F";
@@ -83,6 +95,62 @@ class AddonsMetaData
 		{
 			className="CUP_Misc_e_Config";
 			name="CUP_Misc_e_Config";
+		};
+		class Item7
+		{
+			className="A3_Weapons_F_Mod";
+			name="Arma 3 Official Mod - Weapons and Accessories";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item8
+		{
+			className="A3_Weapons_F";
+			name="Arma 3 Alpha - Weapons and Accessories";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item9
+		{
+			className="ace_ballistics";
+			name="ACE3 - Ballistics";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item10
+		{
+			className="ace_smallarms";
+			name="ACE3 - Small Arms";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item11
+		{
+			className="ace_nightvision";
+			name="ACE3 - Night Vision";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item12
+		{
+			className="ace_medical";
+			name="ACE3 - Medical";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item13
+		{
+			className="ace_attach";
+			name="ACE3 - Attach";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item14
+		{
+			className="ace_chemlights";
+			name="ace_chemlights";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
 		};
 	};
 };
@@ -592,6 +660,102 @@ class Mission
 					class Attributes
 					{
 						isPlayer=1;
+						class Inventory
+						{
+							class primaryWeapon
+							{
+								name="SMG_03_TR_black";
+								class primaryMuzzleMag
+								{
+									name="50Rnd_570x28_SMG_03";
+									ammoLeft=50;
+								};
+							};
+							class handgun
+							{
+								name="hgun_ACPC2_F";
+								class primaryMuzzleMag
+								{
+									name="9Rnd_45ACP_Mag";
+									ammoLeft=8;
+								};
+							};
+							class uniform
+							{
+								typeName="U_I_CombatUniform";
+								isBackpack=0;
+								class MagazineCargo
+								{
+									items=2;
+									class Item0
+									{
+										name="SmokeShell";
+										count=1;
+										ammoLeft=1;
+									};
+									class Item1
+									{
+										name="50Rnd_570x28_SMG_03";
+										count=1;
+										ammoLeft=50;
+									};
+								};
+								class ItemCargo
+								{
+									items=1;
+									class Item0
+									{
+										name="FirstAidKit";
+										count=1;
+									};
+								};
+							};
+							class vest
+							{
+								typeName="V_BandollierB_oli";
+								isBackpack=0;
+								class MagazineCargo
+								{
+									items=5;
+									class Item0
+									{
+										name="9Rnd_45ACP_Mag";
+										count=2;
+										ammoLeft=8;
+									};
+									class Item1
+									{
+										name="HandGrenade";
+										count=2;
+										ammoLeft=1;
+									};
+									class Item2
+									{
+										name="SmokeShellGreen";
+										count=1;
+										ammoLeft=1;
+									};
+									class Item3
+									{
+										name="Chemlight_green";
+										count=2;
+										ammoLeft=1;
+									};
+									class Item4
+									{
+										name="50Rnd_570x28_SMG_03";
+										count=2;
+										ammoLeft=50;
+									};
+								};
+							};
+							map="ItemMap";
+							compass="ItemCompass";
+							watch="ItemWatch";
+							radio="ItemRadio";
+							hmd="NVGoggles_INDEP";
+							headgear="H_HelmetCrew_I";
+						};
 					};
 					id=38;
 					type="I_crew_F";

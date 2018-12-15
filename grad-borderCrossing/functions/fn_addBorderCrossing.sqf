@@ -21,7 +21,7 @@ params ["_gate", "_gateGuardClass", "_side", ["_guardClass", ""], ["_speedSign",
 diag_log format ["SETUP: %1, %2, %3, %4, %5", _gate, _gateGuardClass, _side, _guardClass, _speedSign];
 
 missionNamespace setVariable ["Grad_borderCrossing_gates", (missionNamespace getVariable ["Grad_borderCrossing_gates", []] pushBackUnique _gate)];
-
+test_gate = _gate;
 [_gate] call grad_borderCrossing_fnc_gateDestroyedEH;
 
 if (_guardClass == "") then {
@@ -30,24 +30,14 @@ if (_guardClass == "") then {
 
 private _areaDistance = 50;
 private _areaWidth = 10;
-
 private _gatePos = getPos _gate;
 private _areaPos = _gatePos getPos [_areaDistance, (getDir _gate) + 180];
-
-private _gateGuard = (createGroup _side) createUnit [_gateGuardClass, (_gatePos getPos [10, (getDir _gate) + 240]), [], 0, "CAN_COLLIDE"];
-private _guard = (createGroup _side) createUnit [_gateGuardClass, (_gatePos getPos [20, (getDir _gate) + 180]), [], 0, "CAN_COLLIDE"];
-
-diag_log format ["GateGuard: %1, Guard: %2", (side _gateGuard), (side _guard)];
-
-_guard setDir ((getDir _gate) + 180);
-_gateGuard setDir ((getDir _gate) + 180);
-doStop _guard;
-doStop _gateGuard;
+private _watchPos = _gatePos getPos [30, (getDir _gate) + 210];
+private _gateGuard = [_gateGuardClass, _side, (_gatePos getPos [10, (getDir _gate) + 240]), ((getDir _gate) + 180), _watchPos] call grad_borderCrossing_fnc_createGuard;
+private _guard = [_guardClass, _side, (_gatePos getPos [20, (getDir _gate) + 180]), ((getDir _gate) + 180), _watchPos] call grad_borderCrossing_fnc_createGuard;
 
 _gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", false];
 _gateGuard setVariable ["GRAD_BorderCrossing_gate", _gate];
-//_guard disableAI "ANIM";
-//_gateGuard disableAI "ANIM";
 
 //add the guards to the GVAR
 private _guards = _gate getVariable ["GRAD_BorderCrossing_assignedGuards", []];
@@ -56,11 +46,10 @@ _guards pushBackUnique _guard;
 _gate setVariable ["GRAD_BorderCrossing_assignedGuards", _guards, true];
 
 //create speed sign
-private _speedSignPos = _gatePos getPos [100, (getDir _gate) + 180];
-_speedSignPos set [2,-1];
+private _speedSignPos = (_gatePos getPos [100, (getDir _gate) + 180]) set [2,-1];
 private _speedSign = _speedSign createVehicle _speedSignPos;
 _speedSign setDir ((getDir _gate) + 0);
-
+_speedSign setPos _speedSignPos;
 
 // area to check for vehicles wanting to get in
 private _areaArray = [_areaPos, _areaWidth, _areaDistance, 0, true, 10];
