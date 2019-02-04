@@ -23,10 +23,10 @@ _gateGuard doWatch _vehicle;
 
 systemChat format ["Checking Vehicle: %1", _vehicle];
 
-[_gateGuard, "Acts_SignalToCheck", 0] call ace_common_fnc_doAnimation;
+[{[_gateGuard, "Acts_SignalToCheck", 0] call ace_common_fnc_doAnimation;},[],1] call CBA_fnc_waitAndExecute;
 
 private _pos =(getPos _vehicle) getPos [2, 270];
-_pos  set [2,0];
+_pos set [2,0];
 
 private _debugObject = createSimpleObject ["Sign_Sphere10cm_F", _pos];
 _debugObject setPos _pos;
@@ -39,11 +39,11 @@ _waypoint setWaypointCompletionRadius 0;
 _wp setWaypointPosition [(AGLToASL _pos), -1];
 (group _gateGuard) setCurrentWaypoint _waypoint;
 */
-
+/*
 [
    {((getPos (_this select 0)) isEqualTo (_this select 1))},{
       _this params ["_gateGuard", "", "_vehicle", "_gate"];
-
+*/
       private _checkPlayer = [];
       private _crew = [];
       {
@@ -98,4 +98,4 @@ _wp setWaypointPosition [(AGLToASL _pos), -1];
             30
          ] call CBA_fnc_waitUntilAndExecute;
       };
-   },[_gateGuard, _movePosDoor, _vehicle, _gate]] call CBA_fnc_waitUntilAndExecute;
+//   },[_gateGuard, _movePosDoor, _vehicle, _gate]] call CBA_fnc_waitUntilAndExecute;

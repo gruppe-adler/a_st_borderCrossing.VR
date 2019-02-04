@@ -24,6 +24,7 @@ private _guard = (createGroup _side) createUnit [_guardClass, _pos, [], 0, "CAN_
 _guard setDir _dir;
 _guard setPos _pos;
 doStop _guard;
+_guard disableAI "AUTOTARGET";
 
 if !(isNil "_watchPos") then {
    _guard doWatch _watchPos;
