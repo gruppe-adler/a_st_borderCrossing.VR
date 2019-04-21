@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=51;
+		nextID=83;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3621.7939,12.813647,321.44498};
-		dir[]={0.32230791,-0.78704607,0.52623039};
-		up[]={0.4110494,0.61688888,0.6711157};
-		aside[]={0.85286582,4.3060572e-007,-0.52236587};
+		pos[]={3628.3457,69.407959,410.49109};
+		dir[]={-0.0035798044,-0.95414925,0.299573};
+		up[]={-0.011401381,0.29937875,0.9540593};
+		aside[]={1.0000031,-1.4262187e-006,0.011950829};
 	};
 };
 binarizationWanted=0;
@@ -27,13 +27,11 @@ addons[]=
 {
 	"A3_Structures_F_Walls",
 	"A3_Soft_F_Gamma_Hatchback_01",
-	"A3_Characters_F",
-	"A3_Characters_F_Exp_Civil",
-	"A3_Soft_F_Gamma_Van_01",
-	"ace_refuel",
 	"CUP_Buildings_Config",
 	"CUP_Misc_e_Config",
+	"A3_Characters_F",
 	"A3_Weapons_F_Mod_SMGs_SMG_03",
+	"cba_jr",
 	"ace_realisticnames",
 	"A3_Weapons_F_Mod",
 	"A3_Weapons_F_Pistols_ACPC2",
@@ -50,7 +48,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=15;
+		items=14;
 		class Item0
 		{
 			className="A3_Structures_F";
@@ -67,85 +65,78 @@ class AddonsMetaData
 		};
 		class Item2
 		{
+			className="CUP_Buildings_Config";
+			name="CUP_Buildings_Config";
+		};
+		class Item3
+		{
+			className="CUP_Misc_e_Config";
+			name="CUP_Misc_e_Config";
+		};
+		class Item4
+		{
 			className="A3_Characters_F";
 			name="Arma 3 Alpha - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item3
-		{
-			className="A3_Characters_F_Exp";
-			name="Arma 3 Apex - Characters and Clothing";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item4
-		{
-			className="ace_refuel";
-			name="ACE3 - Refuel";
-			author="ACE-Team";
-			url="http://ace3mod.com/";
-		};
 		class Item5
-		{
-			className="CUP_Buildings_Config";
-			name="CUP_Buildings_Config";
-		};
-		class Item6
-		{
-			className="CUP_Misc_e_Config";
-			name="CUP_Misc_e_Config";
-		};
-		class Item7
 		{
 			className="A3_Weapons_F_Mod";
 			name="Arma 3 Official Mod - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item8
+		class Item6
+		{
+			className="cba_jr";
+			name="Community Base Addons - Joint Rails";
+			author="CBA Team";
+			url="https://www.github.com/CBATeam/CBA_A3";
+		};
+		class Item7
 		{
 			className="A3_Weapons_F";
 			name="Arma 3 Alpha - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item9
+		class Item8
 		{
 			className="ace_ballistics";
 			name="ACE3 - Ballistics";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
-		class Item10
+		class Item9
 		{
 			className="ace_smallarms";
 			name="ACE3 - Small Arms";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
-		class Item11
+		class Item10
 		{
 			className="ace_nightvision";
 			name="ACE3 - Night Vision";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
-		class Item12
+		class Item11
 		{
 			className="ace_medical";
 			name="ACE3 - Medical";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
-		class Item13
+		class Item12
 		{
 			className="ace_attach";
 			name="ACE3 - Attach";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
-		class Item14
+		class Item13
 		{
 			className="ace_chemlights";
 			name="ace_chemlights";
@@ -518,6 +509,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={3626.655,9.0502806,463.99301};
+				angles[]={0,0.0028274334,0};
 			};
 			side="Empty";
 			flags=5;
@@ -527,13 +519,81 @@ class Mission
 			};
 			id=2;
 			type="Land_BarGate_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="DoorStates";
+					expression="['init',_this,_value] call bis_fnc_3DENAttributeDoorStates;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"ARRAY"
+								};
+							};
+							class value
+							{
+								items=3;
+								class Item0
+								{
+									class data
+									{
+										class type
+										{
+											type[]=
+											{
+												"SCALAR"
+											};
+										};
+										value=0;
+									};
+								};
+								class Item1
+								{
+									class data
+									{
+										class type
+										{
+											type[]=
+											{
+												"SCALAR"
+											};
+										};
+										value=0;
+									};
+								};
+								class Item2
+								{
+									class data
+									{
+										class type
+										{
+											type[]=
+											{
+												"SCALAR"
+											};
+										};
+										value=0;
+									};
+								};
+							};
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item1
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3626.9063,6.4501238,324.27899};
+				position[]={3627.1836,6.4501238,413.91943};
 			};
 			side="Empty";
 			flags=4;
@@ -544,70 +604,6 @@ class Mission
 			type="C_Hatchback_01_sport_F";
 		};
 		class Item2
-		{
-			dataType="Group";
-			side="Civilian";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={3626.7224,5.0014391,318.58484};
-					};
-					side="Civilian";
-					flags=6;
-					class Attributes
-					{
-					};
-					id=10;
-					type="C_man_1";
-				};
-			};
-			class Attributes
-			{
-			};
-			class CrewLinks
-			{
-				class LinkIDProvider
-				{
-					nextID=1;
-				};
-				class Links
-				{
-					items=1;
-					class Item0
-					{
-						linkID=0;
-						item0=10;
-						item1=9;
-						class CustomData
-						{
-							role=1;
-						};
-					};
-				};
-			};
-			id=8;
-		};
-		class Item3
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={3626.7224,6.8577781,318.54385};
-			};
-			side="Civilian";
-			flags=6;
-			class Attributes
-			{
-			};
-			id=9;
-			type="C_Van_01_fuel_F";
-		};
-		class Item4
 		{
 			dataType="Object";
 			class PositionInfo
@@ -624,7 +620,7 @@ class Mission
 			type="Land_Vez";
 			atlOffset=-3.9999998;
 		};
-		class Item5
+		class Item3
 		{
 			dataType="Object";
 			class PositionInfo
@@ -640,7 +636,7 @@ class Mission
 			id=26;
 			type="Land_Hlidac_Budka_EP1";
 		};
-		class Item6
+		class Item4
 		{
 			dataType="Group";
 			side="Independent";
@@ -652,8 +648,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3624.2681,5.0014391,324.50793};
-						angles[]={0,1.6224444,0};
+						position[]={3625.1545,5.0014391,414.18597};
+						angles[]={0,1.6485533,0};
 					};
 					side="Independent";
 					flags=7;
@@ -765,6 +761,36 @@ class Mission
 			{
 			};
 			id=46;
+		};
+		class Item5
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3621.5103,6.1224999,380.01196};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=81;
+			type="Land_RedWhitePole_F";
+		};
+		class Item6
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3631.4355,6.1224999,379.99985};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=82;
+			type="Land_RedWhitePole_F";
 		};
 	};
 };

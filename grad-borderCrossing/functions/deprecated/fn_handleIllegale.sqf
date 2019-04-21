@@ -11,7 +11,7 @@
 * None
 *
 * Example:
-* [this, "B_Story_SF_Captain_F", east] call grad_borderCrossing_fnc_addBorderCrossing;
+* [this, "B_Story_SF_Captain_F", east] call GRAD_BorderCrossing_fnc_addBorderCrossing;
 *
 * Public: No
 */
@@ -42,7 +42,7 @@ _guard setVariable ["GRAD_BorderCrossing_stopCrossing", true, true];
    30,
    {
       //if player does not respond, raise Alarm
-      ["grad_borderCrossing_alert", [_target, _gate]] call CBA_fnc_globalEvent;
+      ["GRAD_BorderCrossing_alert", [_target, _gate]] call CBA_fnc_globalEvent;
    }
 ] call CBA_fnc_waitUntilAndExecute;
 

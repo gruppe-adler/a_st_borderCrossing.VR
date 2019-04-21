@@ -7,7 +7,7 @@
  * None
  *
  * Example:
- * [] call grad_borderCrossing_fnc_handleMultipleVehicles;
+ * [] call GRAD_BorderCrossing_fnc_handleMultipleVehicles;
  *
  * Public: No
  */

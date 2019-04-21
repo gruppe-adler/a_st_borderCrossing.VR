@@ -296,9 +296,9 @@ _guard addEventHandler ["AnimDone", {
 	 	_gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", true];
 
 
-		private _vehicle = [_vehiclesWaiting, _gate] call grad_borderCrossing_fnc_getBorderCrossingVehicle;
+		private _vehicle = [_vehiclesWaiting, _gate] call GRAD_BorderCrossing_fnc_getBorderCrossingVehicle;
 		if (!isNull _vehicle) then {
-			[_areaArray, _vehicle, _gateGuard, _gate] call grad_borderCrossing_fnc_directVehicle;
+			[_areaArray, _vehicle, _gateGuard, _gate] call GRAD_BorderCrossing_fnc_directVehicle;
 		};
 	};
 

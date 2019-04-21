@@ -7,7 +7,7 @@
  * None
  *
  * Example:
- * [] call grad_borderCrossing_fnc_handleUnitNotInVehicle;
+ * [] call GRAD_BorderCrossing_fnc_handleUnitNotInVehicle;
  *
  * Public: No
  */

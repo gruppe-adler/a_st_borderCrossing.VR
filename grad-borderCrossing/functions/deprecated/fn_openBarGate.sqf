@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [_areaArray, _vehicle, _guard, _gate] call grad_borderCrossing_fnc_openBarGate;
+ * [_areaArray, _vehicle, _guard, _gate] call GRAD_BorderCrossing_fnc_openBarGate;
  *
  * Public: No
  */

@@ -7,14 +7,14 @@
  * None
  *
  * Example:
- * [] call grad_borderCrossing_fnc_init;
+ * [] call GRAD_BorderCrossing_fnc_init;
  *
  * Public: No
  */
 
 if (!isServer) exitWith {};
 
-["grad_borderCrossing_alert", {
+["GRAD_BorderCrossing_alert", {
    params ["_station1"];
    _thisArgs params ["_station"];
 
@@ -23,7 +23,7 @@ if (!isServer) exitWith {};
    private _check = false;
    {
       if (_station == _x) exitWith {_check = true;};
-   }forEach (missionNamespace getVariable ["Grad_borderCrossing_gates", []]);
+   }forEach (missionNamespace getVariable ["GRAD_BorderCrossing_gates", []]);
 
    if !(_check) exitWith {};
 

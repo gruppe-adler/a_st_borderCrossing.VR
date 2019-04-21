@@ -1,0 +1,42 @@
+
+/*
+[{
+	params ["_args", "_handle"];
+	_args params ["_areaArray", "_areaArrayTrigger", "_guard", "_gatePos", "_gate", "_gateGuard"];
+
+	//condition to end loop
+	if !([_gate, _gateGuard, _guard] call CBA_fnc_isAlive) then {
+	 	[_handle] call CBA_fnc_removePerFrameHandler;
+	};
+
+	// if alarm runs, dont do anything
+	if (_guard getVariable ["GRAD_BorderCrossing_alarmRaised", false]) exitWith {};
+
+	// only accept cars
+	private _vehiclesWaiting = (allUnits inAreaArray _areaArray) select {((side _x) in [resistance, civilian ]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}};
+
+	private _queue = _gate getVariable ["GRAD_BorderCrossing_queue", []];
+	if !(_queue isEqualTo []) then {
+		{
+			if (_x in _vehiclesWaiting) then {
+			 _vehiclesWaiting deleteAt (_vehiclesWaiting find _x);
+			};
+		}forEach _queue;
+	};
+
+	if (count _vehiclesWaiting > 0) then {
+		_queue = _queue + _vehiclesWaiting;
+		_gate setVariable ["GRAD_BorderCrossing_queue", _queue, true];
+	};
+
+	if (_queue isEqualTo []) exitWith {};
+
+	private _nextVehicle = (allUnits inAreaArray _areaArray) select {((side _x) in [resistance, civilian ]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x} && {!(isEngineOn (vehicle _x))}};
+	if (!(_gateGuard getVariable ["GRAD_BorderCrossing_guard_busy", false]) && {!(isNil "_nextVehicle")} && {count _nextVehicle > 0}) then {
+		[(vehicle (_nextVehicle select 0)), _gate, _guard, _gateGuard] call GRAD_BorderCrossing_fnc_checkVehicle;
+	};
+
+},1,[_areaArray, _areaArrayTrigger, _guard, _gatePos, _gate, _gateGuard]] call CBA_fnc_addPerFrameHandler;
+
+[_guard, _gate, _gateGuard] call GRAD_BorderCrossing_fnc_handleQueue;
+*/

@@ -7,7 +7,7 @@
 * None
 *
 * Example:
-* [] call grad_borderCrossing_fnc_handleDiaglog;
+* [] call GRAD_BorderCrossing_fnc_handleDiaglog;
 *
 * Public: No
 */

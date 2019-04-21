@@ -12,7 +12,7 @@
  * 1: guard <OBJECT>
  *
  * Example:
- * _guard = [_gate, _guardClass, _side, 20, 180, _watchPos] call grad_borderCrossing_fnc_createGuard;
+ * _guard = [_gate, _guardClass, _side, 20, 180, _watchPos] call GRAD_BorderCrossing_fnc_createGuard;
  *
  * Public: No
  */

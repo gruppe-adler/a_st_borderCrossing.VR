@@ -7,7 +7,7 @@
  * None
  *
  * Example:
- * _passPortData call grad_borderCrossing_fnc_checkPassport;
+ * _passPortData call GRAD_BorderCrossing_fnc_checkPassport;
  *
  * Public: No
  */
