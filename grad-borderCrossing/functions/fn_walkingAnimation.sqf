@@ -15,39 +15,65 @@
  * Public: No
  */
 
- params ["_vehicle", "_gate", "_guard", "_gateGuard"];
+params ["_vehicle", "_gate", "_gateGuard"];
 
- _gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", true];
- _gateGuard lookAt _vehicle;
- _gateGuard doWatch _vehicle;
+_gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", true];
 
- systemChat format ["Checking Vehicle: %1", _vehicle];
+private _destinationPos = (getPos _vehicle) getPos [1.6, 275];
+_gateGuard lookAt _destinationPos;
+_gateGuard doWatch _destinationPos;
+_gateGuard setDir (_gateGuard getDir _destinationPos);
+
+systemChat format ["Checking Vehicle: %1", _vehicle];
 
 [{
+    params ["_vehicle", "_gate", "_gateGuard", "_destinationPos"];
 
-    _unit disableAI "MOVE";
-    _unit disableAI "TARGET";
-    _unit disableAI "WEAPONAIM";
-    _unit disableAI "CHECKVISIBLE";
-    _unit setDir (_unit getRelDir _destinationPos);
+    _gateGuard disableAI "MOVE";
+    _gateGuard disableAI "TARGET";
+    _gateGuard disableAI "WEAPONAIM";
+    _gateGuard disableAI "CHECKVISIBLE";
+
+    private _debugObject = createSimpleObject ["Sign_Sphere10cm_F", _destinationPos];
+    _debugObject setPos _destinationPos;
+
+    private _distance = ((getPos _gateGuard) distance _destinationPos) / 4.32756;
+    private _itterations = floor _distance;
+    private _remainingDistance = _distance - _itterations;
+
+    systemChat format ["Distance: %1, restDistance: %2, Itterations: %3", _distance, _remainingDistance, _itterations];
+
+    private _time = 0;
+    for "_i" from 1 to _itterations do {
+        [{
+            [_this, "AmovPercMwlkSlowWrflDf_v1", 1] call ace_common_fnc_doAnimation;
+        }, _gateGuard, _time] call CBA_fnc_waitAndExecute;
+
+        _time = _time + 5;
+    };
+
+    if (_remainingDistance > 0.2) then {
+        private _remainingItterationTime = (_remainingDistance / (4.32756/5)) *2;
+
+        systemchat str _remainingItterationTime;
+
+        [{
+            [_this, "AmovPercMwlkSlowWrflDf_v1", 1] call ace_common_fnc_doAnimation;
+        }, _gateGuard, _time] call CBA_fnc_waitAndExecute;
+
+        systemChat format ["OldTime: %1, New: %2", _time, _time + _remainingItterationTime +1];
+        _time = _time + _remainingItterationTime + 1;
+
+        [{
+            [_this, "AmovPercMstpSlowWrflDnon", 1] call ace_common_fnc_doAnimation;
+        }, _gateGuard, _time] call CBA_fnc_waitAndExecute;
+    };
 
     [{
-       params ["_args", "_handle"];
-       _args params ["_unit", "_destinationPos"];
+           _gateGuard enableAI "MOVE";
+           _gateGuard enableAI "TARGET";
+           _gateGuard enableAI "WEAPONAIM";
+           _gateGuard enableAI "CHECKVISIBLE";
+    },[_vehicle, _gate, _gateGuard, _destinationPos], _time] call CBA_fnc_waitAndExecute;
 
-       //leave loop when done
-       if (getPos _unit == _destinationPos || _unit getVariable ["GRAD_BorderCrossing_alarmRaised", false]) exitWith {
-          _unit enableAI "MOVE";
-          _unit enableAI "TARGET";
-          _unit enableAI "WEAPONAIM";
-          _unit enableAI "CHECKVISIBLE";
-          [_handle] call CBA_fnc_removePerFrameHandler;
-       };
-
-       //do animation
-
-       //move unit
-
-
-    },1,[_unit, _destinationPos]] call CBA_fnc_addPerFrameHandler;
-},[],1] call CBA_fnc_waitAndExecute;
+}, [_vehicle, _gate, _gateGuard, _destinationPos], 1.5] call CBA_fnc_waitAndExecute;

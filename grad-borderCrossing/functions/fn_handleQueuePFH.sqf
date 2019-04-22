@@ -60,14 +60,15 @@
        };
    }forEach _waitZones;
 
-    private _vehiclesNeedingChecking = {(allUnits inAreaArray [_areaPosCheck, _areaWidth, _areaDistance, 0, true, 10]) select {((side _x) in [resistance, civilian]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}}};
-
+    private _vehiclesNeedingChecking = (allUnits inAreaArray [_areaPosCheck, _areaWidth, _areaDistance, 0, true, 10]) select {((side _x) in [resistance, civilian]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}};
     switch (true) do {
         case ((count _vehiclesNeedingChecking) == 1) : {
             private _vehicle = _vehiclesNeedingChecking select 0;
 
             if !(_vehicle getVariable ["GRAD_BorderCrossing_checkInProgress", false]) then {
-                [_vehicle] call GRAD_BorderCrossing_fnc_checkPassport;
+
+                _vehicle setVariable ["GRAD_BorderCrossing_checkInProgress", true];
+                [_vehicle, _gate, _gateGuard, _guard] call GRAD_BorderCrossing_fnc_handleVehicleCheck;
             };
         };
         case (count _vehiclesNeedingChecking > 1) : {

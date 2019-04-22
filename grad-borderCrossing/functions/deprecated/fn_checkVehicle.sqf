@@ -17,15 +17,7 @@
 
 
 
-[{[_gateGuard, "Acts_SignalToCheck", 0] call ace_common_fnc_doAnimation;},[],1] call CBA_fnc_waitAndExecute;
 
-private _pos =(getPos _vehicle) getPos [2, 270];
-_pos set [2,0];
-
-private _debugObject = createSimpleObject ["Sign_Sphere10cm_F", _pos];
-_debugObject setPos _pos;
-systemChat str ([_debugObject, (getPos _debugObject)]);
-(group _gateGuard) move _pos;
 
 /*
 private _waypoint = (group _gateGuard) addWaypoint [[0,0,0], 0];

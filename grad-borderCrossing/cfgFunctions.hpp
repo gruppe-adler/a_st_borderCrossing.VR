@@ -11,8 +11,10 @@ class GRAD_BorderCrossing {
         // class handleIllegale;
         // class handleMultipleVehicles;
         class handleQueuePFH;
+        class handleVehicleCheck;
         // class handleUnitNotInVehicle;
         class init { postInit = 1; };
         // class openBarGate;
+        class walkingAnimation;
     };
 };

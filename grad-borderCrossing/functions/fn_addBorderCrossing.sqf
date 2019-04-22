@@ -31,11 +31,13 @@ if (_guardClass == "") then {
 private _gatePos = _gate modelToWorld [0,0,0];
 private _gateDir180 = (getDir _gate) + 180;
 private _watchPos = _gatePos getPos [30, _gateDir180];
-private _gateGuard = [_gateGuardClass, _side, (_gatePos getPos [5, (getDir _gate) + 250]), _gateDir180, _watchPos] call GRAD_BorderCrossing_fnc_createGuard;
+private _gateGuard = [_gateGuardClass, _side, (_gatePos getPos [8, (getDir _gate) + 255]), _gateDir180, _watchPos] call GRAD_BorderCrossing_fnc_createGuard;
 private _guard = [_guardClass, _side, (_gatePos getPos [20, (getDir _gate) + 160]), _gateDir180, _watchPos] call GRAD_BorderCrossing_fnc_createGuard;
 
 _gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", false];
 _gateGuard setVariable ["GRAD_BorderCrossing_gate", _gate];
+_gateGuard setVariable ["GRAD_BorderCrossing_standingPos", getPos _gateGuard];
+test_guard = _gateGuard;
 
 //add the guards to the GVAR
 private _guards = _gate getVariable ["GRAD_BorderCrossing_assignedGuards", []];
@@ -145,7 +147,6 @@ if (GRAD_BorderCrossing_debug) then {
 
 			if !(_lastState isEqualTo [_isActive, _vehicleInArea]) then {
 				_gate setVariable [_id + "_lastState", [_isActive, _vehicleInArea]];
-				systemChat format ["Zone: %1, isActiv: %2, VehicleInArea: %3", _x, _isActive, _vehicleInArea];
 
 				if (_isActive && {_vehicleInArea}) then {
 					{
