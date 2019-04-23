@@ -3,6 +3,7 @@ class GRAD_BorderCrossing {
         file = grad-borderCrossing\functions;
 
         class addBorderCrossing;
+        class checkCrew;
         class checkPassport;
         // class checkVehicle;
         class createGuard;
@@ -14,7 +15,7 @@ class GRAD_BorderCrossing {
         class handleVehicleCheck;
         // class handleUnitNotInVehicle;
         class init { postInit = 1; };
-        // class openBarGate;
-        class walkingAnimation;
+        class openBarGate;
+        class waitUntilEngineOff;
     };
 };

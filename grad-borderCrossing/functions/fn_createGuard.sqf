@@ -1,4 +1,4 @@
-#include "script_component.hpp"
+
 /*
  * Arguments:
  * 0: gate <OBJECT>

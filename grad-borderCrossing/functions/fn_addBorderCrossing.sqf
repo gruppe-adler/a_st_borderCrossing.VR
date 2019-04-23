@@ -1,4 +1,4 @@
-#include "script_component.hpp"
+
 /*
  * Arguments:
  * 0: gate <OBJECT>
@@ -60,7 +60,7 @@ _speedSign setPos _speedSignPos;
 	_bumper setPos _pos;
 }forEach [10, 21.5, 32.5, 43.5];
 
-// area to check for vehicles wanting to get in
+//Creating waitingzones and checkzone
 private _areaPosCheck = _gatePos getPos [5, _gateDir180];
 private _areaPosWaitZone1 = _gatePos getPos [16, _gateDir180];
 private _areaPosWaitZone2 = _gatePos getPos [27, _gateDir180];
