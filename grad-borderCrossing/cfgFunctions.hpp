@@ -5,10 +5,9 @@ class GRAD_BorderCrossing {
         class addBorderCrossing;
         class checkCrew;
         class checkPassport;
-        // class checkVehicle;
         class createGuard;
         // class gateDestroyedEH;
-        // class handleDialog;
+        class handleDialog;
         // class handleIllegale;
         // class handleMultipleVehicles;
         class handleQueuePFH;

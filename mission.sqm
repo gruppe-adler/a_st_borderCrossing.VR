@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3628.3457,69.407959,410.49109};
-		dir[]={-0.078532152,-0.93276536,0.35209399};
-		up[]={-0.20306,0.36045074,0.91039956};
-		aside[]={0.97609967,-8.1807229e-007,0.21771476};
+		pos[]={3626.1455,10.951963,405.84439};
+		dir[]={0.024932956,-0.4927879,0.86990207};
+		up[]={0.014111612,0.87009031,0.49265739};
+		aside[]={0.99967241,1.0137755e-005,-0.028648783};
 	};
 };
 binarizationWanted=0;
@@ -640,8 +640,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3625.1545,5.0014391,414.18597};
-						angles[]={0,1.6485533,0};
+						position[]={3625.155,5.0014391,414.18597};
+						angles[]={0,1.6485507,0};
 					};
 					side="Independent";
 					flags=7;
@@ -747,6 +747,48 @@ class Mission
 					};
 					id=38;
 					type="I_crew_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male03GRE";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1.04;
+								};
+							};
+						};
+						nAttributes=2;
+					};
 				};
 			};
 			class Attributes

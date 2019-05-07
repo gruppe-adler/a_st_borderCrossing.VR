@@ -6,15 +6,17 @@ private _crew = [];
 {
    if (isPlayer _x) then {
       _crew pushBackUnique _x;
-      _x setVariable ["GRAD_BorderCrossing_playerCheck", nil, true];
-      [{[] remoteExecCall ["GRAD_BorderCrossing_fnc_handleDiaglog", _this, false];}, _x] call CBA_fnc_execNextFrame;
+      [{
+          [] remoteExecCall ["GRAD_BorderCrossing_fnc_handleDialog", _this, false];}, _x] call CBA_fnc_execNextFrame;
    };
 }forEach crew _vehicle;
 
 if (_crew isEqualTo []) then {
+
    //Handle AI only
    [{[] call GRAD_BorderCrossing_fnc_openBarGate;},[],(random [10,20,30])] call CBA_fnc_waitAndExecute;
 }else{
+
    //Handle Player
    [
       {
@@ -34,17 +36,11 @@ if (_crew isEqualTo []) then {
       },
       {
          params ["_gateGuard", "_vehicle", "_gate", "_crew"];
+         private _check = false;
 
-         private _check = true;
          {
-            _check = _x getVariable ["GRAD_BorderCrossing_playerCheck", false];
-            if !(_check) exitWith {[_x, _gate, _gateGuard] call GRAD_BorderCrossing_fnc_handleIllegale;};
-
-            private _passPortData = [_x] call grad-passport_fnc_getPassportData;
-            _passPortData pushBackUnique (side _gateGuard);
-            _check = _passPortData call GRAD_BorderCrossing_fnc_checkPassport;
-
-            if !(_check) exitWith {[_x, _gate, _gateGuard] call GRAD_BorderCrossing_fnc_handleIllegale;};
+            _check = [_x, str(side _gateGuard)] call GRAD_BorderCrossing_fnc_checkPassport;
+            if !(_check) exitWith {systemchat "Exit";[_x, _gate, _gateGuard] call GRAD_BorderCrossing_fnc_handleIllegale;};
          }forEach _crew;
 
          if (_check) then {
@@ -54,3 +50,4 @@ if (_crew isEqualTo []) then {
       [_gateGuard, _vehicle, _gate, _crew],
       30
    ] call CBA_fnc_waitUntilAndExecute;
+};

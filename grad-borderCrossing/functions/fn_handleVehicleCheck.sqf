@@ -70,6 +70,8 @@ _gateGuard setDir (_gateGuard getDir _destinationPos);
            _gateGuard enableAI "WEAPONAIM";
            _gateGuard enableAI "CHECKVISIBLE";
 
+           systemChat "calling Crew Check";
+
            _this call GRAD_BorderCrossing_fnc_checkCrew;
     },[_vehicle, _gate, _gateGuard], _time] call CBA_fnc_waitAndExecute;
 

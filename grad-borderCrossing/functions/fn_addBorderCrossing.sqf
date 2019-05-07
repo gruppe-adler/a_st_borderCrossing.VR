@@ -31,7 +31,7 @@ if (_guardClass == "") then {
 private _gatePos = _gate modelToWorld [0,0,0];
 private _gateDir180 = (getDir _gate) + 180;
 private _watchPos = _gatePos getPos [30, _gateDir180];
-private _gateGuard = [_gateGuardClass, _side, (_gatePos getPos [8, (getDir _gate) + 255]), _gateDir180, _watchPos] call GRAD_BorderCrossing_fnc_createGuard;
+private _gateGuard = [_gateGuardClass, _side, (_gatePos getPos [5, (getDir _gate) + 250]), _gateDir180, _watchPos] call GRAD_BorderCrossing_fnc_createGuard;
 private _guard = [_guardClass, _side, (_gatePos getPos [20, (getDir _gate) + 160]), _gateDir180, _watchPos] call GRAD_BorderCrossing_fnc_createGuard;
 
 _gateGuard setVariable ["GRAD_BorderCrossing_guard_busy", false];

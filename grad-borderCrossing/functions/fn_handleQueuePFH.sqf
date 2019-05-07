@@ -50,25 +50,28 @@
        if (_vehiclesInZone isEqualTo []) then {
            if (_gate getVariable [_id + "_active", false]) then {
                _gate setVariable [_id + "_active", false];
+               _gate setVariable [_id + "_vehicleInMarker", objNull];
            };
        }else{
            if !(_gate getVariable [_id + "_active", false]) then {
                _gate setVariable [_id + "_active", true];
                _gate setVariable [_id + "_vehicleInMarker", _vehiclesInZone select 0];
-
            };
        };
    }forEach _waitZones;
 
     private _vehiclesNeedingChecking = (allUnits inAreaArray [_areaPosCheck, _areaWidth, _areaDistance, 0, true, 10]) select {((side _x) in [resistance, civilian]) && {(driver (vehicle _x)) isEqualTo _x} && {alive _x}};
+    private _id = format ["GRAD_BorderCrossing_%1", ((_gate getVariable ["GRAD_BorderCrossing_zones", []]) select 0)];
     switch (true) do {
         case ((count _vehiclesNeedingChecking) == 1) : {
             private _vehicle = _vehiclesNeedingChecking select 0;
 
             if !(_vehicle getVariable ["GRAD_BorderCrossing_checkInProgress", false]) then {
+                _gate setVariable [_id + "_active", true];
+                _gate setVariable [_id + "_vehicleInMarker", _vehicle];
 
                 _vehicle setVariable ["GRAD_BorderCrossing_checkInProgress", true];
-                [_vehicle, _gate, _gateGuard, _guard] call GRAD_BorderCrossing_fnc_handleVehicleCheck;
+                [_vehicle, _gate, _gateGuard, _guard] call GRAD_BorderCrossing_fnc_waitUntilEngineOff;
             };
         };
         case (count _vehiclesNeedingChecking > 1) : {
@@ -78,6 +81,14 @@
 
                 };
             }forEach _vehiclesNeedingChecking;
+        };
+
+        case ((count _vehiclesNeedingChecking) == 0) : {
+            if ((_gate animationPhase "Door_1_rot") == 1) then {
+                _gate animate ["Door_1_rot", 0];
+                _gate setVariable [_id + "_active", false];
+                _gate setVariable [_id + "_vehicleInMarker", objNull];
+            };
         };
     };
 

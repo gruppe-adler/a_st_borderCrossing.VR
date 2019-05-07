@@ -1,4 +1,3 @@
-
 /*
  * Arguments:
  * 0: areaArray <ARRAY>
@@ -17,12 +16,15 @@
 
 params ["_vehicle", "_gate", "_gateGuard"];
 
+systemChat "Opening Gate";
 _gateGuard setVariable ["GRAD_BorderCrossing_vehicle", _vehicle];
 
 private _destinationPos = _gateGuard getVariable ["GRAD_BorderCrossing_standingPos", getPos _gateGuard];
 _gateGuard lookAt _destinationPos;
 _gateGuard doWatch _destinationPos;
 _gateGuard setDir (_gateGuard getDir _destinationPos);
+
+systemChat str(_destinationPos);
 
 [{
     params ["_vehicle", "_gate", "_gateGuard", "_destinationPos"];
@@ -78,7 +80,5 @@ _gateGuard setDir (_gateGuard getDir _destinationPos);
 		   _gateGuard doWatch _watchPos;
 		   _gateGuard commandWatch _watchPos;
 		   _gateGuard lookAt _watchPos;
-
-		   [_gateGuard,  "Acts_ShowingTheRightWay_in", 1] call ace_common_fnc_doAnimation;
     },[_gate, _gateGuard], _time] call CBA_fnc_waitAndExecute;
 }, [_vehicle, _gate, _gateGuard, _destinationPos], 1.5] call CBA_fnc_waitAndExecute;
